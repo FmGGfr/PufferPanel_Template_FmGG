@@ -1,14 +1,12 @@
 {
   "name": "fmbot",
   "version": "1.0.0",
-  "description": "Discord music bot on PufferPanel using Poru + Lavalink v4",
-  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^14.x",
+    "dotenv": "^16.x",
+    "lavalink-client": "^2.x"
+  },
   "scripts": {
     "start": "node index.js"
-  },
-  "dependencies": {
-    "discord.js": "^14.16.3",
-    "dotenv": "^16.4.5",
-    "poru": "^4.4.1"
   }
 }
