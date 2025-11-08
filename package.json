@@ -1,13 +1,15 @@
 {
   "name": "fmbot",
   "version": "1.0.0",
-  "description": "Bot Discord de base compatible avec PufferPanel",
+  "description": "Bot Discord musique (Lavalink + Discord.js v14)",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
     "discord.js": "^14.15.2",
+    "erela.js": "^2.3.3",
+    "erela.js-spotify": "^1.2.0",
     "dotenv": "^16.3.1"
   }
 }
