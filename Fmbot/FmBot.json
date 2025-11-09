@@ -6,32 +6,32 @@
         "instance_name": {
             "type": "string",
             "value": "",
-            "display": "Nom de l'instance",
-            "desc": "Choisis un nom pour ton bot (ex : FmBot)",
+            "display": "Instance Name",
+            "desc": "Enter the unique name of your bot instance (example: FmBot). This defines the data folder name for your bot.",
             "required": true,
             "userEdit": true
         },
         "prefix": {
             "type": "string",
             "value": "!",
-            "display": "Préfixe principal",
-            "desc": "Préfixe pour soliciter ton bot",
+            "display": "Main Prefix",
+            "desc": "Primary prefix used to call your bot commands (example: !help).",
             "required": true,
             "userEdit": true
         },
         "prefix2": {
             "type": "string",
             "value": "",
-            "display": "Préfixe secondaire",
-            "desc": "Second préfixe (si besoin)",
+            "display": "Secondary Prefix",
+            "desc": "Optional secondary prefix (example: $). Leave empty if not needed.",
             "required": false,
             "userEdit": true
         },
         "prefix3": {
             "type": "string",
             "value": "",
-            "display": "Préfixe tertiaire",
-            "desc": "Troisième préfixe (si besoin)",
+            "display": "Tertiary Prefix",
+            "desc": "Optional third prefix (example: ?). Leave empty if not needed.",
             "required": false,
             "userEdit": true
         },
@@ -39,6 +39,7 @@
             "type": "string",
             "value": "",
             "display": "Discord Bot Token",
+            "desc": "Your bot’s secret token. You can find it on https://discord.com/developers/applications > Bot > Token. Keep it private.",
             "required": true,
             "userEdit": true
         }
@@ -50,7 +51,8 @@
                 "python3 -m venv venv",
                 "bash -c 'source venv/bin/activate && pip install -U pip setuptools wheel Red-DiscordBot'",
                 "mkdir -p ${instance_name}",
-                "bash -c 'source venv/bin/activate && redbot-setup --no-prompt --instance-name ${instance_name} --data-path ${instance_name} --backend json'"
+                "bash -c 'source venv/bin/activate && redbot-setup --no-prompt --instance-name ${instance_name} --data-path ${instance_name} --backend json'",
+                "bash -c 'echo \"TOKEN=${token}\" > .env'"
             ]
         }
     ],
@@ -58,12 +60,12 @@
         {
             "type": "command",
             "commands": [
-                "rm -rf venv ${instance_name}"
+                "rm -rf venv ${instance_name} .env"
             ]
         }
     ],
     "run": {
-        "command": "bash -c 'source venv/bin/activate && redbot ${instance_name} --token \"${token}\" --prefix \"${prefix}\" --prefix \"${prefix2}\" --prefix \"${prefix3}\"'",
+        "command": "bash -c 'source venv/bin/activate && source .env && redbot ${instance_name} --token \"$TOKEN\" --prefix \"${prefix}\" --prefix \"${prefix2}\" --prefix \"${prefix3}\"'",
         "stopCode": 9,
         "stdin": {
             "type": "stdin"
@@ -88,14 +90,16 @@
         ]
     },
     "stats": {
-        "type": ""
+        "type": "",
+        "desc": "No monitoring stats are collected by default."
     },
     "query": {
-        "type": ""
+        "type": "",
+        "desc": "No query integration required."
     },
     "keepAlive": {
         "frequency": "",
         "command": ""
     },
-    "name": "RedBotDiscord2"
+    "name": "RedDiscordBot"
 }
