@@ -3,14 +3,28 @@
     "display": "discord.py Bot",
     "name": "discord-py-bot",
 
+    "data": {
+        "bot-py-file": {
+            "type": "string",
+            "value": "bot.py",
+            "display": "Main bot file",
+            "desc": "Python file to start the bot.",
+            "required": true,
+            "userEdit": true
+        }
+    },
+
     "install": [
         {
             "type": "command",
             "commands": [
-                "curl -L \"https://github.com/FmGGfr/PufferPanel_Template_FmGG/archive/refs/heads/main.zip\" -o source.zip",
-                "unzip -o source.zip -d src",
-                "rm source.zip",
-                "FOLDER=$(ls src) && mv src/$FOLDER/Fmbot/* . && rm -rf src",
+                "apt update -y && apt install -y git",
+
+                "git clone https://github.com/Rapptz/discord.py.git src",
+
+                "mv src/* .",
+                "rm -rf src",
+
                 "python3 -m venv venv",
                 "./venv/bin/pip install --upgrade pip",
                 "./venv/bin/pip install -r requirements.txt"
@@ -19,23 +33,16 @@
     ],
 
     "run": {
-        "command": "./venv/bin/python bot.py",
+        "command": "./venv/bin/python ${bot-py-file}",
         "stopCode": 9,
-        "stdin": { "type": "stdin" }
-    },
-
-    "data": {
-        "bot-py-file": {
-            "type": "string",
-            "value": "bot.py",
-            "display": "Main bot file",
-            "desc": "Python file to launch.",
-            "required": true,
-            "userEdit": true
+        "stdin": {
+            "type": "stdin"
         }
     },
 
-    "environment": { "type": "host" },
+    "environment": {
+        "type": "host"
+    },
 
     "supportedEnvironments": [
         { "type": "host" },
@@ -43,6 +50,6 @@
     ],
 
     "requirements": {
-        "binaries": ["python3", "curl", "unzip"]
+        "binaries": ["python3"]
     }
 }
