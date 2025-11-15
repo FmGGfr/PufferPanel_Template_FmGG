@@ -18,8 +18,8 @@
         {
             "type": "command",
             "commands": [
-                "git clone https://github.com/Rapptz/discord.py.git src",
-                "mv src/* .",
+                "git clone https://github.com/TON_USER/TON_REPO.git src",
+                "cp -R src/. .",
                 "rm -rf src",
                 "python3 -m venv venv",
                 "./venv/bin/pip install --upgrade pip",
